@@ -1,0 +1,28 @@
+services:
+  # Backend API Service
+  - type: web
+    name: weather-backend
+    runtime: python
+    repo: https://github.com/YOUR_USERNAME/weather-app
+    plan: free
+    region: oregon
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+
+  # Frontend Static Site
+  - type: web
+    name: weather-frontend
+    runtime: static
+    repo: https://github.com/YOUR_USERNAME/weather-app
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=31536000
+    envVars:
+      - key: VITE_API_URL
+        value: https://weather-backend.onrender.com
