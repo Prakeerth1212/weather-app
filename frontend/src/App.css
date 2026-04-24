@@ -665,3 +665,28 @@ body {
     justify-content: center;
   }
 }
+
+.row-actions button {
+  background: #f0efe9;
+  color: #1a1917;
+  border: 1px solid #e0ddd4;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.row-actions button:hover {
+  background: #2d5a3d;
+  color: white;
+}
+
+.btn-danger {
+  color: #b84040 !important;
+  border-color: #e8c8c8 !important;
+}
+
+.btn-danger:hover {
+  background: #fdf0f0 !important;
+  color: #b84040 !important;
+}
