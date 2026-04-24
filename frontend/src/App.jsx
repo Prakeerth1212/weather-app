@@ -9,7 +9,6 @@ import WeatherAlerts from "./components/WeatherAlerts";
 import TravelTips from "./components/TravelTips";
 import "./App.css";
 
-// At the top of App.jsx, replace the API constant
 const API =
   import.meta.env.VITE_API_URL ||
   (window.location.hostname === "localhost"
