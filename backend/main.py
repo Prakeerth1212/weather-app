@@ -12,6 +12,8 @@ from typing import Optional, List
 from pydantic import BaseModel
 
 app = FastAPI(title="Weather App API", version="1.0.0")
+
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,7 +21,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Database
 DB_PATH = "weather.db"
+
 def get_db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -49,6 +54,7 @@ def init_db():
 
 init_db()
 
+# Models
 class QueryCreate(BaseModel):
     location: str
     date_from: str
@@ -60,8 +66,11 @@ class QueryUpdate(BaseModel):
     date_to: Optional[str] = None
     summary: Optional[str] = None
 
+# Helper Functions
 async def geocode(location: str) -> dict:
     """Convert location name or coordinates to lat/lon"""
+    
+    # Check if location is already coordinates (contains comma and both parts are numbers)
     if ',' in location:
         try:
             parts = location.split(',')
@@ -139,6 +148,7 @@ def wmo_description(code: int) -> str:
     }
     return codes.get(code, "Unknown")
 
+# API Endpoints
 @app.get("/")
 async def root():
     return {"message": "Weather App API", "status": "running"}
