@@ -1,3 +1,5 @@
+const APP_VERSION = "1.0.0";
+
 import { useState, useCallback } from "react";
 import CurrentWeather from "./components/CurrentWeather";
 import Forecast from "./components/Forecast";
